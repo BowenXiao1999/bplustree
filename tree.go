@@ -28,22 +28,35 @@ func (bt *BTree) First() *leafNode {
 
 // insert inserts a (key, value) into the B+ tree
 func (bt *BTree) Insert(key int, value string) {
+
+	// oldIndex represent the index of leaf node in its parent
+	// leaf is the leaf node key locate in
 	_, oldIndex, leaf := search(bt.root, key)
+
+	// the interior parent
 	p := leaf.parent()
 
+	// insert the key into mid
+	// leaf may split, if it split, leaf.next will be new Node
 	mid, bump := leaf.insert(key, value)
+
+	// if it is ok to hold, return 
 	if !bump {
 		return
 	}
 
+	// not ok to hold, so create a new leaf
 	var midNode node
 	midNode = leaf
 
+	// set the children and parent of new Node
 	p.kcs[oldIndex].child = leaf.next
 	leaf.next.setParent(p)
 
 	interior, interiorP := p, p.parent()
 
+
+	// loop until no more merge can be done
 	for {
 		var oldIndex int
 		var newNode *interiorNode
@@ -54,11 +67,14 @@ func (bt *BTree) Insert(key int, value string) {
 			oldIndex, _ = interiorP.find(key)
 		}
 
+		// insert midNode, because if it bump, we have
+		// override kcs[oldIndex], so insert it again
 		mid, newNode, bump = interior.insert(mid, midNode)
 		if !bump {
 			return
 		}
 
+		
 		if !isRoot {
 			interiorP.kcs[oldIndex].child = newNode
 			newNode.setParent(interiorP)

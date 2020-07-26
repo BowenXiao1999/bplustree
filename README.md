@@ -1,5 +1,5 @@
 bplustree
 =========
 
-A Go based B plus tree for learning database internals. Underconstruction. 
+A great Go-based B plus tree implementation for learning database internals. Easy structure and abundant comment.
 
