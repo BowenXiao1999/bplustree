@@ -56,7 +56,7 @@ func (bt *BTree) Insert(key int, value string) {
 	interior, interiorP := p, p.parent()
 
 
-	// loop until no more merge can be done
+	// loop until no more split can be done
 	for {
 		var oldIndex int
 		var newNode *interiorNode
@@ -67,7 +67,7 @@ func (bt *BTree) Insert(key int, value string) {
 			oldIndex, _ = interiorP.find(key)
 		}
 
-		// insert midNode, because if it bump, we have
+		// insert midNode, because if bump, we must have
 		// override kcs[oldIndex], so insert it again
 		mid, newNode, bump = interior.insert(mid, midNode)
 		if !bump {
@@ -76,6 +76,8 @@ func (bt *BTree) Insert(key int, value string) {
 
 		
 		if !isRoot {
+
+			// set new node
 			interiorP.kcs[oldIndex].child = newNode
 			newNode.setParent(interiorP)
 
@@ -88,7 +90,7 @@ func (bt *BTree) Insert(key int, value string) {
 			return
 		}
 
-		interior, interiorP = interiorP, interior.parent()
+		interior, interiorP = interiorP, interiorP.parent()
 	}
 }
 
