@@ -1,5 +1,3 @@
-bplustree
-=========
+# B+ Tree Implementation
 
-A great Go-based B plus tree implementation for learning database internals. Easy structure and abundant comment.
-
+WIP. Write this code for pratice purpose. Langugae specific. 
