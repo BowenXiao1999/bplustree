@@ -6,13 +6,12 @@ using namespace std;
 
 const int MAXKV = 255;
 const int MAXKC = 511;
-
+struct findResult {
+    string value;
+    bool ok;
+};
 class AbstractNode {
     public:
-    struct findResult {
-        string value;
-        bool ok;
-    };
     virtual interiorNode* parent();
     virtual void setParent(interiorNode*);
     virtual bool full();
