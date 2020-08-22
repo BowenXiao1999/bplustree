@@ -22,6 +22,18 @@ class interiorNode: public AbstractNode {
     int count;
     interiorNode* p;
 
+    interiorNode(kcs, interiorNode*, int);
+    tuple<int, bool> find(string) override;
+    void setParent(interiorNode*) override;
+    bool full() override;
+    interiorNode* parent() override;
+    void setParent(interiorNode*);
+
+private:
+    tuple<int, interiorNode*, bool> insert(int key, AbstractNode node);
+    tuple<interiorNode*, int> split();
+    int searchFirstLarge(int mi, int key);
+
 };
 
 interiorNode::interiorNode(kcs c, interiorNode* p, int cnt) {
