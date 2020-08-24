@@ -6,8 +6,7 @@
 
 //using namespace std;
 
-const int MAXKV = 255;
-const int MAXKC = 511;
+
 
 class AbstractNode {
     public:

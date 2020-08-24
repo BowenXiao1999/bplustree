@@ -4,7 +4,7 @@
 #include <algorithm>
 using namespace std;
 
-
+const int MAXKV = 255;
 const int MAXKC = 511;
 
 struct kc
@@ -17,7 +17,7 @@ struct kc
 typedef kc kcs[MAXKC+1];
 
 class interiorNode: public AbstractNode {
-    public:
+public:
     kcs kcs;
     int count;
     interiorNode* p;
